@@ -13,6 +13,11 @@ var spotify = new Spotify(keys.spotify);
 var omdb = (keys.omdb);
 var seatgeek = keys.seatgeek;
 
+//variables
+var movie;
+
+
+
 // PROMPT for choosing commands
 
 inquirer
@@ -39,25 +44,25 @@ inquirer
       message: "Enter a movie name. (Use quotations if the title is more than one word)"
     }
   ])
-  .then(answers => {
-    console.log (
-      movieThis()
-    )
+  .then(function(res) {
+    console.log (res.movie)
+    movie = res.movie;
+    movieThis()
   });
-   
     }
+    // else (user.choices === "do-what-it-says") {
+    //   console.log (
+
+    //   )
+    // };
   });
 
 // functions
 
-function movieThis() {
-  var movieName = process.argv[2];
-  if(!movieName){
-    movieName = "mr nobody";
-  }
 
+function movieThis() {
   var queryUrl =
-    "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+    "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
 
   axios
     .get(queryUrl)
@@ -88,6 +93,8 @@ function concertThis() {
 };
 
 function doWhatev() {
+  fs.readFile("random.txt", "utf8", function(err, data) {
 
+  })
 };
   
